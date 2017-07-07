@@ -57,24 +57,23 @@
     CGRect keyBoardBeginFrame = [notify.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect keyBoardEndFrame = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSTimeInterval duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
     // 如果没有移动
     if (keyBoardEndFrame.origin.y - keyBoardBeginFrame.origin.y == 0) {
         return;
     }
     
     // 记录偏移量
-    CGFloat offset = [self getOffsetKeyboardFrame:keyBoardEndFrame withView:self.responder.view];
+    CGFloat offset = [self getOffsetKeyboardFrame:keyBoardEndFrame];
     
     // 如果被遮挡
     if (offset > 0) {
-        self.responder.offset = offset;
-        
         // 如果是scrollView
         if (self.responder.isScrollMoveView) {
             UIScrollView *moveV = (UIScrollView *)self.responder.view.zy_MoveView;
             [UIView animateWithDuration:duration animations:^{
-                moveV.contentInset = UIEdgeInsetsMake(moveV.contentInset.top, moveV.contentInset.left, moveV.contentInset.bottom + offset, moveV.contentInset.right);
-                moveV.contentOffset = CGPointMake(moveV.contentOffset.x, moveV.contentOffset.y + offset);
+                moveV.contentInset = UIEdgeInsetsMake(self.responder.contentInset.top, self.responder.contentInset.left, self.responder.contentInset.bottom + offset, self.responder.contentInset.right);
+                moveV.contentOffset = CGPointMake(self.responder.contentOffset.x, self.responder.contentOffset.y + offset);
             }];
         }else{
             [UIView animateWithDuration:duration animations:^{
@@ -82,7 +81,7 @@
             }];
         }
     }
-
+    
 }
 
 - (void)keyBoardHidden:(NSNotification *)notify
@@ -96,41 +95,35 @@
     if (self.responder.isScrollMoveView) {
         UIScrollView *moveV = (UIScrollView *)self.responder.view.zy_MoveView;
         [UIView animateWithDuration:duration animations:^{
-            moveV.contentInset = UIEdgeInsetsMake(moveV.contentInset.top, moveV.contentInset.left, moveV.contentInset.bottom - self.responder.offset, moveV.contentInset.right);
+            moveV.contentInset = self.responder.contentInset;
+            moveV.contentOffset = self.responder.contentOffset;
         }completion:^(BOOL finished) {
             self.responder.view = nil;
-            self.responder.offset = 0;
-            self.responder.isScrollMoveView = NO;
         }];
     }else{
         [UIView animateWithDuration:duration animations:^{
-            self.responder.view.zy_MoveView.transform = CGAffineTransformTranslate(self.responder.view.zy_MoveView.transform, 0, self.responder.offset);
+            self.responder.view.zy_MoveView.transform = self.responder.transform;
         }completion:^(BOOL finished) {
             [self.responder.view.zy_MoveView removeGestureRecognizer:self.closeGes];
             self.responder.view = nil;
-            self.responder.offset = 0;
-            self.responder.isScrollMoveView = NO;;
         }];
     }
 }
 
 /**
  获取view的最低部和键盘之间的距离
-
+ 
  @param frame 键盘的位置
- @param v 要比较的view
  @return offset
  */
-- (CGFloat)getOffsetKeyboardFrame:(CGRect)frame withView:(UIView<ZYKB> *)v
+- (CGFloat)getOffsetKeyboardFrame:(CGRect)frame
 {
-    UIWindow *window = [UIApplication sharedApplication].delegate.window;
-    CGRect wFrame = [v convertRect:v.bounds toView:window];
-    return CGRectGetMaxY(wFrame) - frame.origin.y  + v.zy_KeyBoardDistance;
+    return CGRectGetMaxY(self.responder.frame) - frame.origin.y  + self.responder.view.zy_KeyBoardDistance;
 }
 
 /**
  开始编辑
-
+ 
  @param control control description
  */
 - (void)controlBeginEditing:(UIView<ZYKB> *)control
@@ -144,8 +137,6 @@
     }
     
     self.responder.view = control;
-    self.responder.isScrollMoveView = [control.zy_MoveView isKindOfClass:[UIScrollView class]];
-    self.responder.isTextView = [control isKindOfClass:[UITextView class]];
     
     // 添加关闭手势
     if (self.responder.isScrollMoveView) {

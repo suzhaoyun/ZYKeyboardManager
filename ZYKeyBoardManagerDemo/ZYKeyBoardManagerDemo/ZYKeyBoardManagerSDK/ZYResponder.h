@@ -13,10 +13,34 @@
 
 @property (nonatomic, weak) UIView<ZYKB> *view;
 
-@property (nonatomic, assign) CGFloat offset;
+/**
+ 记录文本框原有的位置
+ */
+@property (nonatomic, assign, readonly) CGRect frame;
 
-@property (nonatomic, assign) BOOL isScrollMoveView;
+/**
+ 记录scrollView原有的contentInset
+ */
+@property (nonatomic, assign, readonly) UIEdgeInsets contentInset;
 
-@property (nonatomic, assign) BOOL isTextView;
+/**
+ 记录scrollView原有的contentOffset
+ */
+@property (nonatomic, assign, readonly) CGPoint contentOffset;
+
+/**
+ 保存view原有的tranform
+ */
+@property (nonatomic, assign, readonly) CGAffineTransform transform;
+
+/**
+ 获取当前的移动视图是不是scrollView
+ */
+@property (nonatomic, assign, readonly) BOOL isScrollMoveView;
+
+/**
+ 判断当前文本框是不是textView
+ */
+@property (nonatomic, assign, readonly) BOOL isTextView;
 
 @end
