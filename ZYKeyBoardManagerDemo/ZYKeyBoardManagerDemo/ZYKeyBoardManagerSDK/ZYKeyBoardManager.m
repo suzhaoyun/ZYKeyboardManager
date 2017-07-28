@@ -67,19 +67,21 @@
     CGFloat offset = [self getOffsetKeyboardFrame:keyBoardEndFrame];
     
     // 如果被遮挡
-    if (offset > 0) {
-        // 如果是scrollView
-        if (self.responder.isScrollMoveView) {
-            UIScrollView *moveV = (UIScrollView *)self.responder.view.zy_MoveView;
-            [UIView animateWithDuration:duration animations:^{
-                moveV.contentInset = UIEdgeInsetsMake(self.responder.contentInset.top, self.responder.contentInset.left, self.responder.contentInset.bottom + offset, self.responder.contentInset.right);
-                moveV.contentOffset = CGPointMake(self.responder.contentOffset.x, self.responder.contentOffset.y + offset);
-            }];
-        }else{
-            [UIView animateWithDuration:duration animations:^{
-                self.responder.view.zy_MoveView.transform = CGAffineTransformTranslate(self.responder.view.zy_MoveView.transform, 0, -(offset));
-            }];
-        }
+    if (offset <= 0) {
+        return;
+    }
+    
+    // 如果是scrollView
+    if (self.responder.isScrollMoveView) {
+        UIScrollView *moveV = (UIScrollView *)self.responder.view.zy_MoveView;
+        [UIView animateWithDuration:duration animations:^{
+            moveV.contentInset = UIEdgeInsetsMake(self.responder.contentInset.top, self.responder.contentInset.left, self.responder.contentInset.bottom + offset, self.responder.contentInset.right);
+            moveV.contentOffset = CGPointMake(self.responder.contentOffset.x, self.responder.contentOffset.y + offset);
+        }];
+    }else{
+        [UIView animateWithDuration:duration animations:^{
+            self.responder.view.zy_MoveView.transform = CGAffineTransformTranslate(self.responder.transform, 0, -(offset));
+        }];
     }
     
 }
