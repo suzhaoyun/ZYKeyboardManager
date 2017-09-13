@@ -53,15 +53,9 @@
         return;
     }
     
-    //如果有移动 开始frame-结束frame
-    CGRect keyBoardBeginFrame = [notify.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    // 获取键盘最终的位置
     CGRect keyBoardEndFrame = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSTimeInterval duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    // 如果没有移动
-    if (keyBoardEndFrame.origin.y - keyBoardBeginFrame.origin.y == 0) {
-        return;
-    }
     
     // 记录偏移量
     CGFloat offset = [self getOffsetKeyboardFrame:keyBoardEndFrame];
