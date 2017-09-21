@@ -1,18 +1,23 @@
 //
-//  ZYResponder.m
-//  探索UItextField
+//  ZYKeyBoardResponder.m
+//  ZYKeyBoardManagerDemo
 //
-//  Created by ZYSu on 2017/4/19.
+//  Created by ZYSu on 2017/9/21.
 //  Copyright © 2017年 ZYSu. All rights reserved.
 //
 
-#import "ZYResponder.h"
+#import "ZYKeyBoardResponder.h"
 
-@implementation ZYResponder
+@implementation ZYKeyBoardResponder
 
-- (void)setView:(UIView<ZYKB> *)view
+- (void)setView:(UIView<ZYKeyBoardSenderProtocol> *)view
 {
-    _view = view;
+    if (view.zy_MoveView == _view.zy_MoveView) {
+        _view = view;
+        return;
+    }else{
+        _view = view;
+    }
     
     _isScrollMoveView = [view.zy_MoveView isKindOfClass:[UIScrollView class]];
     _isTextView = [view isKindOfClass:[UITextView class]];

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EVj-BA-omw">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="O1m-Vc-iiP">
+            <objects>
+                <viewController id="EVj-BA-omw" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="orJ-lF-FJL"/>
+                        <viewControllerLayoutGuide type="bottom" id="MOh-B7-nH9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9rO-lc-EQB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="来吧" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1m8-bn-so4">
+                                <rect key="frame" x="85" y="537" width="204" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="204" id="Zly-ve-cMf"/>
+                                    <constraint firstAttribute="height" constant="30" id="y6d-oT-Q21"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="这是一段非常长的文字,...." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9Pf-bk-d9u">
+                                <rect key="frame" x="80" y="390" width="215" height="97"/>
+                                <color key="backgroundColor" red="1" green="0.8980392157" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="215" id="ek1-V4-AuD"/>
+                                    <constraint firstAttribute="height" constant="97" id="oV5-LW-2x5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="演示避免键盘遮挡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OjN-af-eOV">
+                                <rect key="frame" x="118" y="60" width="139" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="139" id="Qpg-vz-JsI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入啊" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ols-vE-RMG">
+                                <rect key="frame" x="85.5" y="181" width="204" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="204" id="bfC-Ch-vsi"/>
+                                    <constraint firstAttribute="height" constant="30" id="nIU-NC-AF3"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1m8-bn-so4" firstAttribute="centerX" secondItem="9Pf-bk-d9u" secondAttribute="centerX" id="MpC-Eq-n9J"/>
+                            <constraint firstItem="1m8-bn-so4" firstAttribute="top" secondItem="9Pf-bk-d9u" secondAttribute="bottom" constant="50" id="WaA-N7-1wB"/>
+                            <constraint firstItem="9Pf-bk-d9u" firstAttribute="centerX" secondItem="Ols-vE-RMG" secondAttribute="centerX" id="dvl-Nc-dHl"/>
+                            <constraint firstItem="OjN-af-eOV" firstAttribute="centerX" secondItem="9rO-lc-EQB" secondAttribute="centerX" id="f7f-qS-wQ4"/>
+                            <constraint firstItem="OjN-af-eOV" firstAttribute="top" secondItem="orJ-lF-FJL" secondAttribute="bottom" constant="40" id="fsq-M5-Mnh"/>
+                            <constraint firstItem="Ols-vE-RMG" firstAttribute="centerX" secondItem="OjN-af-eOV" secondAttribute="centerX" id="fya-va-2TL"/>
+                            <constraint firstItem="MOh-B7-nH9" firstAttribute="top" secondItem="1m8-bn-so4" secondAttribute="bottom" constant="100" id="gEt-zm-v2j"/>
+                            <constraint firstItem="Ols-vE-RMG" firstAttribute="top" secondItem="OjN-af-eOV" secondAttribute="bottom" constant="100" id="zSu-Hd-kYC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qAl-mg-DnE"/>
+                    <connections>
+                        <outlet property="textF1" destination="Ols-vE-RMG" id="QTZ-ld-cym"/>
+                        <outlet property="textF2" destination="1m8-bn-so4" id="znQ-Jc-yxP"/>
+                        <outlet property="textV" destination="9Pf-bk-d9u" id="sXQ-dA-M4F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="byu-5s-rDw" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1716" y="226"/>
+        </scene>
+    </scenes>
+</document>

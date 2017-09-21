@@ -6,9 +6,9 @@
 //  Copyright © 2017年 ZYSu. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@protocol ZYKB <NSObject>
+@protocol ZYKeyBoardSenderProtocol <NSObject>
 
 /// 与键盘之间的距离 默认为10
 @property (nonatomic, assign) CGFloat zy_KeyBoardDistance;

@@ -8,14 +8,14 @@
 
 #import "ZYKeyBoardManager.h"
 #import <UIKit/UIKit.h>
-#import "ZYResponder.h"
+#import "ZYKeyBoardResponder.h"
 
 @interface ZYKeyBoardManager ()
 
 /**
  当前的响应者
  */
-@property (nonatomic, strong) ZYResponder *responder;
+@property (nonatomic, strong) ZYKeyBoardResponder *responder;
 
 /**
  键盘关闭手势
@@ -33,9 +33,14 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _manager = [[self alloc] init];
-        _manager.responder = [[ZYResponder alloc] init];
+        _manager.responder = [[ZYKeyBoardResponder alloc] init];
     });
     return _manager;
+}
+
++ (void)initialize
+{
+    [[self sharedManager] startListening];
 }
 
 - (void)startListening
@@ -100,7 +105,6 @@
         [UIView animateWithDuration:duration animations:^{
             self.responder.view.zy_MoveView.transform = self.responder.transform;
         }completion:^(BOOL finished) {
-            [self.responder.view.zy_MoveView removeGestureRecognizer:self.closeGes];
             self.responder.view = nil;
         }];
     }
@@ -122,24 +126,22 @@
  
  @param control control description
  */
-- (void)controlBeginEditing:(UIView<ZYKB> *)control
+- (void)controlBeginEditing:(UIView<ZYKeyBoardSenderProtocol> *)control
 {
     if (!self.enable || control.zy_MoveView == nil) {
         return;
     }
     
-    if (self.responder.view && self.responder.isScrollMoveView == NO) {
-        [self.responder.view.zy_MoveView removeGestureRecognizer:self.closeGes];
-    }
+    // 删除手势
+    [self.closeGes.view removeGestureRecognizer:self.closeGes];
     
+    // 修改当前响应者
     self.responder.view = control;
     
     // 添加关闭手势
     if (self.responder.isScrollMoveView) {
         UIScrollView *sclV = (UIScrollView *)control.zy_MoveView;
-        if (sclV.keyboardDismissMode != UIScrollViewKeyboardDismissModeOnDrag) {
-            sclV.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        }
+        [sclV setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
     }else{
         if ([control.zy_MoveView isKindOfClass:[UIView class]] && [control.zy_MoveView.gestureRecognizers containsObject:self.closeGes] == NO) {
             [control.zy_MoveView addGestureRecognizer:self.closeGes];

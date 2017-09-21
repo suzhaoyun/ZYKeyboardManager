@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZYKeyBoardSender.h"
 
 @interface ZYKeyBoardManager : NSObject
 
@@ -19,10 +20,5 @@
  单例manager
  */
 + (instancetype)sharedManager;
-
-/**
- 开始监听
- */
-- (void)startListening;
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "ZYKeyBoardManagerSDK.h"
+#import "ZYKeyBoardManager.h"
+#import "TableViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *textF1;
@@ -20,9 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // 首先开始监听 最好放在appdelegate的didFinishLaunch中
-    [[ZYKeyBoardManager sharedManager] startListening];
+
+    self.navigationItem.title = @"普通界面";
     
     // 指定被遮挡时 需要移动的view
     self.textF1.zy_MoveView = self.view;
@@ -33,12 +33,5 @@
     
     self.textF2.zy_MoveView = self.view;
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

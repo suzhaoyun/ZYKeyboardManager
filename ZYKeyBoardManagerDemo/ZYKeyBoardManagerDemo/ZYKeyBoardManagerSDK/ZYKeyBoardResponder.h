@@ -1,17 +1,17 @@
 //
-//  ZYResponder.h
-//  探索UItextField
+//  ZYKeyBoardResponder.h
+//  ZYKeyBoardManagerDemo
 //
-//  Created by ZYSu on 2017/4/19.
+//  Created by ZYSu on 2017/9/21.
 //  Copyright © 2017年 ZYSu. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "ZYKB.h"
+#import "ZYKeyBoardSenderProtocol.h"
 
-@interface ZYResponder : NSObject
+@interface ZYKeyBoardResponder : NSObject
 
-@property (nonatomic, weak) UIView<ZYKB> *view;
+@property (nonatomic, weak) UIView<ZYKeyBoardSenderProtocol> *view;
 
 /**
  记录文本框原有的位置

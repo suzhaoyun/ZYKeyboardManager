@@ -13,10 +13,17 @@
 		58A6BCE21EA76F7C00038490 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A6BCE01EA76F7C00038490 /* Main.storyboard */; };
 		58A6BCE41EA76F7C00038490 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58A6BCE31EA76F7C00038490 /* Assets.xcassets */; };
 		58A6BCE71EA76F7C00038490 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A6BCE51EA76F7C00038490 /* LaunchScreen.storyboard */; };
-		58A6BCF91EA76F9200038490 /* UITextField+ZYKB.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A6BCF01EA76F9200038490 /* UITextField+ZYKB.m */; };
-		58A6BCFA1EA76F9200038490 /* UITextView+ZYKB.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A6BCF21EA76F9200038490 /* UITextView+ZYKB.m */; };
 		58A6BCFB1EA76F9200038490 /* ZYKeyBoardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A6BCF51EA76F9200038490 /* ZYKeyBoardManager.m */; };
-		58A6BCFC1EA76F9200038490 /* ZYResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A6BCF81EA76F9200038490 /* ZYResponder.m */; };
+		58FE1A5E1F7393590075FD70 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE1A5C1F7393590075FD70 /* TableViewController.m */; };
+		58FE1A611F73939C0075FD70 /* TableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58FE1A601F73939C0075FD70 /* TableViewController.storyboard */; };
+		58FE1A641F73B5640075FD70 /* ZYKeyBoardSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE1A631F73B5640075FD70 /* ZYKeyBoardSender.m */; };
+		58FE1A671F73B5850075FD70 /* ZYKeyBoardResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE1A661F73B5850075FD70 /* ZYKeyBoardResponder.m */; };
+		58FE1A691F73B8FB0075FD70 /* ViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58FE1A681F73B8FB0075FD70 /* ViewController.storyboard */; };
+		58FE1A6D1F73B9290075FD70 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE1A6B1F73B9290075FD70 /* AlertViewController.m */; };
+		58FE1A6E1F73B9290075FD70 /* AlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FE1A6C1F73B9290075FD70 /* AlertViewController.xib */; };
+		58FE1A721F73B9650075FD70 /* AlertTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE1A701F73B9650075FD70 /* AlertTestView.m */; };
+		58FE1A751F73B9D70075FD70 /* AlertTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FE1A741F73B9D70075FD70 /* AlertTestView.xib */; };
+		58FE1A781F73BAEC0075FD70 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE1A771F73BAEC0075FD70 /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,16 +37,25 @@
 		58A6BCE31EA76F7C00038490 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58A6BCE61EA76F7C00038490 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58A6BCE81EA76F7C00038490 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		58A6BCEF1EA76F9200038490 /* UITextField+ZYKB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+ZYKB.h"; sourceTree = "<group>"; };
-		58A6BCF01EA76F9200038490 /* UITextField+ZYKB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+ZYKB.m"; sourceTree = "<group>"; };
-		58A6BCF11EA76F9200038490 /* UITextView+ZYKB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZYKB.h"; sourceTree = "<group>"; };
-		58A6BCF21EA76F9200038490 /* UITextView+ZYKB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZYKB.m"; sourceTree = "<group>"; };
-		58A6BCF31EA76F9200038490 /* ZYKB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYKB.h; sourceTree = "<group>"; };
+		58A6BCF31EA76F9200038490 /* ZYKeyBoardSenderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYKeyBoardSenderProtocol.h; sourceTree = "<group>"; };
 		58A6BCF41EA76F9200038490 /* ZYKeyBoardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYKeyBoardManager.h; sourceTree = "<group>"; };
 		58A6BCF51EA76F9200038490 /* ZYKeyBoardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYKeyBoardManager.m; sourceTree = "<group>"; };
-		58A6BCF61EA76F9200038490 /* ZYKeyBoardManagerSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYKeyBoardManagerSDK.h; sourceTree = "<group>"; };
-		58A6BCF71EA76F9200038490 /* ZYResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYResponder.h; sourceTree = "<group>"; };
-		58A6BCF81EA76F9200038490 /* ZYResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYResponder.m; sourceTree = "<group>"; };
+		58FE1A5B1F7393590075FD70 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		58FE1A5C1F7393590075FD70 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		58FE1A601F73939C0075FD70 /* TableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TableViewController.storyboard; sourceTree = "<group>"; };
+		58FE1A621F73B5640075FD70 /* ZYKeyBoardSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYKeyBoardSender.h; sourceTree = "<group>"; };
+		58FE1A631F73B5640075FD70 /* ZYKeyBoardSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYKeyBoardSender.m; sourceTree = "<group>"; };
+		58FE1A651F73B5850075FD70 /* ZYKeyBoardResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYKeyBoardResponder.h; sourceTree = "<group>"; };
+		58FE1A661F73B5850075FD70 /* ZYKeyBoardResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYKeyBoardResponder.m; sourceTree = "<group>"; };
+		58FE1A681F73B8FB0075FD70 /* ViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ViewController.storyboard; sourceTree = "<group>"; };
+		58FE1A6A1F73B9290075FD70 /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
+		58FE1A6B1F73B9290075FD70 /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
+		58FE1A6C1F73B9290075FD70 /* AlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertViewController.xib; sourceTree = "<group>"; };
+		58FE1A6F1F73B9650075FD70 /* AlertTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTestView.h; sourceTree = "<group>"; };
+		58FE1A701F73B9650075FD70 /* AlertTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTestView.m; sourceTree = "<group>"; };
+		58FE1A741F73B9D70075FD70 /* AlertTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertTestView.xib; sourceTree = "<group>"; };
+		58FE1A761F73BAEC0075FD70 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		58FE1A771F73BAEC0075FD70 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +90,20 @@
 			children = (
 				58A6BCDA1EA76F7C00038490 /* AppDelegate.h */,
 				58A6BCDB1EA76F7C00038490 /* AppDelegate.m */,
+				58FE1A761F73BAEC0075FD70 /* MainViewController.h */,
+				58FE1A771F73BAEC0075FD70 /* MainViewController.m */,
 				58A6BCDD1EA76F7C00038490 /* ViewController.h */,
 				58A6BCDE1EA76F7C00038490 /* ViewController.m */,
+				58FE1A681F73B8FB0075FD70 /* ViewController.storyboard */,
+				58FE1A6A1F73B9290075FD70 /* AlertViewController.h */,
+				58FE1A6B1F73B9290075FD70 /* AlertViewController.m */,
+				58FE1A6C1F73B9290075FD70 /* AlertViewController.xib */,
+				58FE1A6F1F73B9650075FD70 /* AlertTestView.h */,
+				58FE1A701F73B9650075FD70 /* AlertTestView.m */,
+				58FE1A741F73B9D70075FD70 /* AlertTestView.xib */,
+				58FE1A5B1F7393590075FD70 /* TableViewController.h */,
+				58FE1A5C1F7393590075FD70 /* TableViewController.m */,
+				58FE1A601F73939C0075FD70 /* TableViewController.storyboard */,
 				58A6BCEE1EA76F9200038490 /* ZYKeyBoardManagerSDK */,
 				58A6BCD71EA76F7C00038490 /* Supporting Files */,
 			);
@@ -97,16 +125,13 @@
 		58A6BCEE1EA76F9200038490 /* ZYKeyBoardManagerSDK */ = {
 			isa = PBXGroup;
 			children = (
-				58A6BCEF1EA76F9200038490 /* UITextField+ZYKB.h */,
-				58A6BCF01EA76F9200038490 /* UITextField+ZYKB.m */,
-				58A6BCF11EA76F9200038490 /* UITextView+ZYKB.h */,
-				58A6BCF21EA76F9200038490 /* UITextView+ZYKB.m */,
-				58A6BCF31EA76F9200038490 /* ZYKB.h */,
 				58A6BCF41EA76F9200038490 /* ZYKeyBoardManager.h */,
 				58A6BCF51EA76F9200038490 /* ZYKeyBoardManager.m */,
-				58A6BCF61EA76F9200038490 /* ZYKeyBoardManagerSDK.h */,
-				58A6BCF71EA76F9200038490 /* ZYResponder.h */,
-				58A6BCF81EA76F9200038490 /* ZYResponder.m */,
+				58FE1A621F73B5640075FD70 /* ZYKeyBoardSender.h */,
+				58FE1A631F73B5640075FD70 /* ZYKeyBoardSender.m */,
+				58A6BCF31EA76F9200038490 /* ZYKeyBoardSenderProtocol.h */,
+				58FE1A651F73B5850075FD70 /* ZYKeyBoardResponder.h */,
+				58FE1A661F73B5850075FD70 /* ZYKeyBoardResponder.m */,
 			);
 			path = ZYKeyBoardManagerSDK;
 			sourceTree = "<group>";
@@ -170,9 +195,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58FE1A611F73939C0075FD70 /* TableViewController.storyboard in Resources */,
+				58FE1A691F73B8FB0075FD70 /* ViewController.storyboard in Resources */,
+				58FE1A751F73B9D70075FD70 /* AlertTestView.xib in Resources */,
 				58A6BCE71EA76F7C00038490 /* LaunchScreen.storyboard in Resources */,
 				58A6BCE41EA76F7C00038490 /* Assets.xcassets in Resources */,
 				58A6BCE21EA76F7C00038490 /* Main.storyboard in Resources */,
+				58FE1A6E1F73B9290075FD70 /* AlertViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,13 +212,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58FE1A671F73B5850075FD70 /* ZYKeyBoardResponder.m in Sources */,
 				58A6BCDF1EA76F7C00038490 /* ViewController.m in Sources */,
 				58A6BCFB1EA76F9200038490 /* ZYKeyBoardManager.m in Sources */,
-				58A6BCFA1EA76F9200038490 /* UITextView+ZYKB.m in Sources */,
+				58FE1A781F73BAEC0075FD70 /* MainViewController.m in Sources */,
+				58FE1A641F73B5640075FD70 /* ZYKeyBoardSender.m in Sources */,
 				58A6BCDC1EA76F7C00038490 /* AppDelegate.m in Sources */,
 				58A6BCD91EA76F7C00038490 /* main.m in Sources */,
-				58A6BCFC1EA76F9200038490 /* ZYResponder.m in Sources */,
-				58A6BCF91EA76F9200038490 /* UITextField+ZYKB.m in Sources */,
+				58FE1A5E1F7393590075FD70 /* TableViewController.m in Sources */,
+				58FE1A721F73B9650075FD70 /* AlertTestView.m in Sources */,
+				58FE1A6D1F73B9290075FD70 /* AlertViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +380,7 @@
 				58A6BCED1EA76F7C00038490 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

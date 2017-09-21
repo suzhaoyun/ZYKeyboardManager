@@ -1,14 +1,45 @@
 //
-//  UITextView+ZYKB.m
-//  探索UItextField
+//  ZYKeyBoardSender.m
+//  ZYKeyBoardManagerDemo
 //
-//  Created by ZYSu on 2017/4/19.
+//  Created by ZYSu on 2017/9/21.
 //  Copyright © 2017年 ZYSu. All rights reserved.
 //
 
-#import "UITextView+ZYKB.h"
-#import <objc/runtime.h>
+#import "ZYKeyBoardSender.h"
 #import "ZYKeyBoardManager.h"
+#import <objc/runtime.h>
+
+@implementation UITextField (ZYKB)
+
+- (void)setZy_MoveView:(UIView *)zy_MoveView
+{
+    if (self.zy_MoveView == zy_MoveView) {
+        return;
+    }
+    
+    objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIATION_ASSIGN);
+    
+    [self addTarget:[ZYKeyBoardManager sharedManager] action:NSSelectorFromString(@"controlBeginEditing:") forControlEvents:UIControlEventEditingDidBegin];
+}
+
+- (UIView *)zy_MoveView
+{
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setZy_KeyBoardDistance:(CGFloat)zy_KeyBoardDistance
+{
+    objc_setAssociatedObject(self, @selector(zy_KeyBoardDistance), @(zy_KeyBoardDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGFloat)zy_KeyBoardDistance
+{
+    id n = objc_getAssociatedObject(self, _cmd);
+    return n?[n floatValue]:10.0;
+}
+
+@end
 
 @implementation UITextView (ZYKB)
 
@@ -47,6 +78,9 @@
 
 - (void)setZy_MoveView:(UIView *)zy_MoveView
 {
+    if (self.zy_MoveView == zy_MoveView){
+        return;
+    }
     objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIATION_ASSIGN);
 }
 
