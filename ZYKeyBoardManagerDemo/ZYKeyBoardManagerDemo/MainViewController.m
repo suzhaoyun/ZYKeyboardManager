@@ -32,7 +32,9 @@
     else if (indexPath.row == 2){
         vc = [UIStoryboard storyboardWithName:@"TableViewController" bundle:nil].instantiateInitialViewController;
     }
-    
+    else if (indexPath.row == 3){
+        vc = [UIStoryboard storyboardWithName:@"TestTableViewController" bundle:nil].instantiateInitialViewController;
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 

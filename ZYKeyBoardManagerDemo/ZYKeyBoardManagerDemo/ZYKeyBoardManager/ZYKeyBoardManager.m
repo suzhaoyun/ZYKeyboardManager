@@ -38,8 +38,9 @@
     return _manager;
 }
 
-+ (void)initialize
++ (void)load
 {
+    // 类装载 开始监听
     [[self sharedManager] startListening];
 }
 
@@ -54,7 +55,8 @@
 
 - (void)keyBoardShow:(NSNotification *)notify
 {
-    if (!self.enable || !self.responder.view) {
+    // 在tableViewController中不处理 系统会自动处理
+    if (self.enable == NO || self.responder.view == nil || self.responder.inTableViewController) {
         return;
     }
     
@@ -70,44 +72,19 @@
         return;
     }
     
-    // 如果是scrollView
-    if (self.responder.isScrollMoveView) {
-        UIScrollView *moveV = (UIScrollView *)self.responder.view.zy_MoveView;
-        [UIView animateWithDuration:duration animations:^{
-            moveV.contentInset = UIEdgeInsetsMake(self.responder.contentInset.top, self.responder.contentInset.left, self.responder.contentInset.bottom + offset, self.responder.contentInset.right);
-            moveV.contentOffset = CGPointMake(self.responder.contentOffset.x, self.responder.contentOffset.y + offset);
-        }];
-    }else{
-        [UIView animateWithDuration:duration animations:^{
-            self.responder.view.zy_MoveView.transform = CGAffineTransformTranslate(self.responder.transform, 0, -(offset));
-        }];
-    }
-    
+    // 处理键盘弹出
+    [self.responder keyboardShow:duration offset:offset];
 }
 
 - (void)keyBoardHidden:(NSNotification *)notify
 {
-    if (!self.enable || !self.responder.view) {
+    if (self.enable == NO || self.responder.view == nil || self.responder.inTableViewController) {
         return;
     }
     
     // 恢复移动视图位置
     NSTimeInterval duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    if (self.responder.isScrollMoveView) {
-        UIScrollView *moveV = (UIScrollView *)self.responder.view.zy_MoveView;
-        [UIView animateWithDuration:duration animations:^{
-            moveV.contentInset = self.responder.contentInset;
-            moveV.contentOffset = self.responder.contentOffset;
-        }completion:^(BOOL finished) {
-            self.responder.view = nil;
-        }];
-    }else{
-        [UIView animateWithDuration:duration animations:^{
-            self.responder.view.zy_MoveView.transform = self.responder.transform;
-        }completion:^(BOOL finished) {
-            self.responder.view = nil;
-        }];
-    }
+    [self.responder keyboardHidden:duration];
 }
 
 /**

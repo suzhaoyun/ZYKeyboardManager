@@ -8,17 +8,8 @@
 
 #import "TableViewController.h"
 #import "ZYKeyBoardManager.h"
+#import "TableViewCell.h"
 
-@interface TableViewCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet UILabel *titleL;
-@property (weak, nonatomic) IBOutlet UITextField *textF;
-
-@end
-
-@implementation TableViewCell
-
-@end
 @interface TableViewController ()
 <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

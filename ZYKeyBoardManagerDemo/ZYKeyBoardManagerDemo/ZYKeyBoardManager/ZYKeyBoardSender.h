@@ -1,8 +1,8 @@
 //
-//  ZYKB.h
-//  探索UItextField
+//  ZYKeyBoardSender.h
+//  ZYKeyBoardManagerDemo
 //
-//  Created by ZYSu on 2017/4/19.
+//  Created by ZYSu on 2017/9/21.
 //  Copyright © 2017年 ZYSu. All rights reserved.
 //
 
@@ -16,4 +16,10 @@
 /// 需要做移动的view 默认为当前显示器的view
 @property (nonatomic, weak) UIView *zy_MoveView;
 
+@end
+
+@interface UITextField (ZYKeyBoardSender)<ZYKeyBoardSenderProtocol>
+@end
+
+@interface UITextView (ZYKeyBoardSender)<ZYKeyBoardSenderProtocol>
 @end

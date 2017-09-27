@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZYKeyBoardSenderProtocol.h"
+#import "ZYKeyBoardSender.h"
 
 @interface ZYKeyBoardResponder : NSObject
 
+/**
+ 记录文本框
+ */
 @property (nonatomic, weak) UIView<ZYKeyBoardSenderProtocol> *view;
 
 /**
@@ -42,5 +45,21 @@
  判断当前文本框是不是textView
  */
 @property (nonatomic, assign, readonly) BOOL isTextView;
+
+/**
+ 是不是在tableViewController中
+ */
+@property (nonatomic, assign, readonly) BOOL inTableViewController;
+
+#pragma mark - method
+/**
+ 处理键盘弹出
+ */
+- (void)keyboardShow:(NSTimeInterval)duration offset:(CGFloat)offset;
+
+/**
+ 处理键盘关闭
+ */
+- (void)keyboardHidden:(NSTimeInterval)duration;
 
 @end
