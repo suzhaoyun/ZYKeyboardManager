@@ -41,9 +41,21 @@
 - (IBAction)cancleClick:(id)sender {
     [self.textF resignFirstResponder];
     self.cancleCall?self.cancleCall():NULL;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 0;
+    }completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 - (IBAction)confirmClick:(id)sender {
     self.confirmCall?self.confirmCall(self.textF.text, self):NULL;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 0;
+    }completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 @end

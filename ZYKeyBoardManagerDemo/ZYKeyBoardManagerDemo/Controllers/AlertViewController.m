@@ -22,11 +22,7 @@
 }
 
 - (IBAction)alertClick:(id)sender {
-    [AlertTestView showWithCancleClick:^{
-        
-    } confirmClick:^(NSString *text, UIView *codeView) {
-        [codeView removeFromSuperview];
-    }];
+    [AlertTestView showWithCancleClick:nil confirmClick:nil];
 }
 
 @end

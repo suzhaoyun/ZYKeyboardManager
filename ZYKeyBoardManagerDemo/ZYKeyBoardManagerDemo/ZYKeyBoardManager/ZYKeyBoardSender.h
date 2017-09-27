@@ -19,7 +19,9 @@
 @end
 
 @interface UITextField (ZYKeyBoardSender)<ZYKeyBoardSenderProtocol>
+
 @end
 
 @interface UITextView (ZYKeyBoardSender)<ZYKeyBoardSenderProtocol>
+
 @end
