@@ -32,7 +32,7 @@ self.textField.zy_KeyBoardDistance = 30;
 ## 核心代码
 思路： 通过ZYKeyBoardSender往外发送所有的输入框触发事件，ZYKeyBoardManager收到事件，根据发送者信息，创建ZYKeyBoardResponder,最后ZYKeyBoardManager监听键盘弹出隐藏通知，responder处理响应。
 
-利用runtime的Associated给UITextField, UITextView扩充属性，记录用户设置的moveView, distance
+1. 利用runtime的Associated给UITextField, UITextView扩充属性，记录用户设置的moveView, distance
 ```
 @protocol ZYKeyBoardSenderProtocol <NSObject>
 
@@ -52,7 +52,7 @@ self.textField.zy_KeyBoardDistance = 30;
 
 @end
 ```
-检测文本框的响应：
+2. 检测文本框的响应：
 在检测文本框响应的时候遇到了一些问题， UITextField可以通过添加UIControlEventEditingDidBegin的action方式直接获取到键盘响应，但UITextView并没有此类事件。
 在研究中发现开发者主动调用becomeFirstResponder方法可以主动触发键盘弹出，于是猜测输入框被点击时会不会也会触发这个方法。结果查看调用栈发现了一个更合适的方法，canBecomeFirstResponder，这个方法会决定输入框能不能成为响应者。当看到这个方法的时候，心中就有思路了，利用runtime的methodexchange将系统的canBecomeFirstResponder替换掉，自己可以在能成为响应者的时候，向ZYKeyBoardManager发送事件。
 ```
@@ -81,7 +81,64 @@ objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIA
     return result;
 }
 ```
+3. ZYKeyBoardManager收到事件，创建responder
+```
+/**
+ 开始编辑
+ 
+ @param control control description
+ */
+- (void)controlBeginEditing:(UIView<ZYKeyBoardSenderProtocol> *)control
+{
+    if (!self.enable || control.zy_MoveView == nil) {
+        return;
+    }
+    
+    // 删除手势
+    [self.closeGes.view removeGestureRecognizer:self.closeGes];
+    
+    // 修改当前响应者
+    self.responder.view = control;
+    
+    // 添加关闭手势
+    if (self.responder.isScrollMoveView) {
+        UIScrollView *sclV = (UIScrollView *)control.zy_MoveView;
+        [sclV setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
+    }else{
+        if ([control.zy_MoveView isKindOfClass:[UIView class]] && [control.zy_MoveView.gestureRecognizers containsObject:self.closeGes] == NO) {
+            [control.zy_MoveView addGestureRecognizer:self.closeGes];
+        }
+    }
+}
+```
 
+4. ZYKeyBoardManager监听键盘通知，让responder做出响应
+```
+- (void)keyBoardShow:(NSNotification *)notify
+{   
+    // 获取键盘最终的位置
+    CGRect keyBoardEndFrame = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    // 记录偏移量
+    CGFloat offset = [self getOffsetKeyboardFrame:keyBoardEndFrame];
+    
+    // 如果被遮挡
+    if (offset <= 0) {
+        return;
+    }
+    
+    // 处理键盘弹出
+    [self.responder keyboardShow:duration offset:offset];
+}
+
+- (void)keyBoardHidden:(NSNotification *)notify
+{   
+    // 恢复移动视图位置
+    NSTimeInterval duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [self.responder keyboardHidden:duration];
+}
+```
 ## 期待
 * 如果在使用过程中遇到BUG，希望你能Issues我，谢谢（或者尝试下载最新的框架代码看看BUG修复没有）
 * 如果在使用过程中发现功能不够用，希望你能Issues我，我非常想为这个框架增加更多好用的功能，谢谢
