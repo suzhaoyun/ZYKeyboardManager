@@ -7,20 +7,20 @@ iOS开发中，难免会遇到键盘弹出遮挡了输入框的情景， 这种�
 
 ## 用法 useage
 1. 在需要使用的文件中导入ZYKeyboardManager.h
-```
+```objc
 #import "ZYKeyBoardManager.h"
 ```
 2. 指定输入框被遮挡时需要移动的view
-```
+```objc
 self.textField.zy_MoveView = self.view;
 ```
 3. 支持自定义输入框和键盘的距离 如果不设置默认是10
-```
+```objc
 self.textField.zy_KeyBoardDistance = 30;
 ```
 
 2.0版本支持在tableView中的使用
-```
+```objc
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellId = @"TableViewCell";
@@ -33,7 +33,7 @@ self.textField.zy_KeyBoardDistance = 30;
 思路： 通过ZYKeyBoardSender往外发送所有的输入框触发事件，ZYKeyBoardManager收到事件，根据发送者信息，创建ZYKeyBoardResponder,最后ZYKeyBoardManager监听键盘弹出隐藏通知，responder处理响应。
 
 1. 利用runtime的Associated给UITextField, UITextView扩充属性，记录用户设置的moveView, distance
-```
+```objc
 @protocol ZYKeyBoardSenderProtocol <NSObject>
 
 /// 与键盘之间的距离 默认为10
@@ -55,7 +55,7 @@ self.textField.zy_KeyBoardDistance = 30;
 2. 检测文本框的响应：
 在检测文本框响应的时候遇到了一些问题， UITextField可以通过添加UIControlEventEditingDidBegin的action方式直接获取到键盘响应，但UITextView并没有此类事件。
 在研究中发现开发者主动调用becomeFirstResponder方法可以主动触发键盘弹出，于是猜测输入框被点击时会不会也会触发这个方法。结果查看调用栈发现了一个更合适的方法，canBecomeFirstResponder，这个方法会决定输入框能不能成为响应者。当找到这个方法的时候，思路就明确了，利用runtime的method_exchange黑魔法将系统的canBecomeFirstResponder替换掉，自己可以在能成为响应者的时候，向ZYKeyBoardManager发送事件，完美。
-```
+```objc
 // UITextField
 objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIATION_ASSIGN);
 [self addTarget:[ZYKeyBoardManager sharedManager] action:NSSelectorFromString(@"controlBeginEditing:") forControlEvents:UIControlEventEditingDidBegin];
@@ -82,7 +82,7 @@ objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIA
 }
 ```
 3. ZYKeyBoardManager收到事件，创建responder
-```
+```objc
 /**
  开始编辑
  
@@ -113,7 +113,7 @@ objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIA
 ```
 
 4. ZYKeyBoardManager监听键盘通知，让responder做出响应
-```
+```objc
 - (void)keyBoardShow:(NSNotification *)notify
 {   
     // 获取键盘最终的位置
