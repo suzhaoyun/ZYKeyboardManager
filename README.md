@@ -12,11 +12,11 @@ iOS开发中，难免会遇到键盘弹出遮挡了输入框的情景， 这种�
 ```
 2. 指定输入框被遮挡时需要移动的view
 ```objc
-self.textField.zy_MoveView = self.view;
+self.textField.zyMoveView = self.view;
 ```
 3. 支持自定义输入框和键盘的距离 如果不设置默认是10
 ```objc
-self.textField.zy_KeyBoardDistance = 30;
+self.textField.zyKeyBoardDistance = 30;
 ```
 
 2.0版本支持在tableView中的使用
@@ -25,7 +25,7 @@ self.textField.zy_KeyBoardDistance = 30;
 {
     static NSString *CellId = @"TableViewCell";
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
-    cell.textF.zy_MoveView = self.tableView;
+    cell.textF.zyMoveView = self.tableView;
     return cell;
 }
 ```
@@ -37,10 +37,10 @@ self.textField.zy_KeyBoardDistance = 30;
 @protocol ZYKeyBoardSenderProtocol <NSObject>
 
 /// 与键盘之间的距离 默认为10
-@property (nonatomic, assign) CGFloat zy_KeyBoardDistance;
+@property (nonatomic, assign) CGFloat zyKeyBoardDistance;
 
 /// 需要做移动的view 默认为当前显示器的view
-@property (nonatomic, weak) UIView *zy_MoveView;
+@property (nonatomic, weak) UIView *zyMoveView;
 
 @end
 
@@ -57,7 +57,7 @@ self.textField.zy_KeyBoardDistance = 30;
 在研究中发现开发者主动调用becomeFirstResponder方法可以主动触发键盘弹出，于是猜测输入框被点击时会不会也会触发这个方法。结果查看调用栈发现了一个更合适的方法，canBecomeFirstResponder，这个方法会决定输入框能不能成为响应者。当找到这个方法的时候，思路就明确了，利用runtime的method_exchange黑魔法将系统的canBecomeFirstResponder替换掉，自己可以在能成为响应者的时候，向ZYKeyBoardManager发送事件，完美。
 ```objc
 // UITextField
-objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIATION_ASSIGN);
+objc_setAssociatedObject(self, @selector(zyMoveView), zyMoveView, OBJC_ASSOCIATION_ASSIGN);
 [self addTarget:[ZYKeyBoardManager sharedManager] action:NSSelectorFromString(@"controlBeginEditing:") forControlEvents:UIControlEventEditingDidBegin];
 
 // UITextView
@@ -72,7 +72,7 @@ objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIA
 - (BOOL)zy_canBecomeFirstResponder
 {
     BOOL result = [self zy_canBecomeFirstResponder];
-    if (result && self.zy_MoveView) {
+    if (result && self.zyMoveView) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [[ZYKeyBoardManager sharedManager] performSelector:NSSelectorFromString(@"controlBeginEditing:") withObject:self];
@@ -90,7 +90,7 @@ objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIA
  */
 - (void)controlBeginEditing:(UIView<ZYKeyBoardSenderProtocol> *)control
 {
-    if (!self.enable || control.zy_MoveView == nil) {
+    if (!self.enable || control.zyMoveView == nil) {
         return;
     }
     
@@ -102,11 +102,11 @@ objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIA
     
     // 添加关闭手势
     if (self.responder.isScrollMoveView) {
-        UIScrollView *sclV = (UIScrollView *)control.zy_MoveView;
+        UIScrollView *sclV = (UIScrollView *)control.zyMoveView;
         [sclV setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
     }else{
-        if ([control.zy_MoveView isKindOfClass:[UIView class]] && [control.zy_MoveView.gestureRecognizers containsObject:self.closeGes] == NO) {
-            [control.zy_MoveView addGestureRecognizer:self.closeGes];
+        if ([control.zy_MoveView isKindOfClass:[UIView class]] && [control.zyMoveView.gestureRecognizers containsObject:self.closeGes] == NO) {
+            [control.zyMoveView addGestureRecognizer:self.closeGes];
         }
     }
 }
