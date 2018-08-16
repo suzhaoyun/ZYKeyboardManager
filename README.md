@@ -4,7 +4,6 @@ iOS开发中，难免会遇到键盘弹出遮挡了输入框的情景， 这种�
 - easy to use, only one row code to avoid keyboard cover. green not invade!
 - 简单易用， 一行代码搞定键盘遮挡问题， 绿色无侵入，任意场景都可适用。
 - V2.0发布， 核心代码重构，bug修复。
-![alt](https://github.com/suzhaoyun/ZYKeyboardManager/blob/master/demo.gif)
 ## 用法 useage
 1. 在需要使用的文件中导入ZYKeyboardManager.h
 ```objc
@@ -29,6 +28,7 @@ self.textField.zyKeyBoardDistance = 30;
     return cell;
 }
 ```
+![alt](https://github.com/suzhaoyun/ZYKeyboardManager/blob/master/demo.gif)
 ## 核心代码
 思路： 通过ZYKeyBoardSender往外发送所有的输入框触发事件，ZYKeyBoardManager收到事件，根据发送者信息，创建ZYKeyBoardResponder,最后ZYKeyBoardManager监听键盘弹出隐藏通知，responder处理响应。
 
