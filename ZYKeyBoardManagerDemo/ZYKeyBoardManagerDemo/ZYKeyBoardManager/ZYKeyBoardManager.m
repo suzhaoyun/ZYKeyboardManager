@@ -95,7 +95,7 @@
  */
 - (CGFloat)getOffsetKeyboardFrame:(CGRect)frame
 {
-    return CGRectGetMaxY(self.responder.frame) - frame.origin.y  + self.responder.view.zy_KeyBoardDistance;
+    return CGRectGetMaxY(self.responder.frame) - frame.origin.y  + self.responder.view.zyKeyBoardDistance;
 }
 
 /**
@@ -105,7 +105,7 @@
  */
 - (void)controlBeginEditing:(UIView<ZYKeyBoardSenderProtocol> *)control
 {
-    if (!self.enable || control.zy_MoveView == nil) {
+    if (!self.enable || control.zyMoveView == nil) {
         return;
     }
     
@@ -117,11 +117,11 @@
     
     // 添加关闭手势
     if (self.responder.isScrollMoveView) {
-        UIScrollView *sclV = (UIScrollView *)control.zy_MoveView;
+        UIScrollView *sclV = (UIScrollView *)control.zyMoveView;
         [sclV setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
     }else{
-        if ([control.zy_MoveView isKindOfClass:[UIView class]] && [control.zy_MoveView.gestureRecognizers containsObject:self.closeGes] == NO) {
-            [control.zy_MoveView addGestureRecognizer:self.closeGes];
+        if ([control.zyMoveView isKindOfClass:[UIView class]] && [control.zyMoveView.gestureRecognizers containsObject:self.closeGes] == NO) {
+            [control.zyMoveView addGestureRecognizer:self.closeGes];
         }
     }
 }

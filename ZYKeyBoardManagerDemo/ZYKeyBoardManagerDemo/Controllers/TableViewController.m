@@ -28,7 +28,7 @@
 {
     static NSString *CellId = @"TableViewCell";
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
-    cell.textF.zy_MoveView = self.tableView;
+    cell.textF.zyMoveView = self.tableView;
     cell.titleL.text = [NSString stringWithFormat:@"来玩啊 啊 啊啊啊%zd", indexPath.row];
     return cell;
 }

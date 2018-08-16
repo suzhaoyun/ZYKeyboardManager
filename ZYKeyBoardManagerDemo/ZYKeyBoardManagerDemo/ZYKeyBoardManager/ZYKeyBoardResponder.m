@@ -26,20 +26,20 @@
     }
     
     _inTableViewController = [self inTableViewController:view];
-    _isScrollMoveView = [view.zy_MoveView isKindOfClass:[UIScrollView class]];
+    _isScrollMoveView = [view.zyMoveView isKindOfClass:[UIScrollView class]];
     _isTextView = [view isKindOfClass:[UITextView class]];
     _frame = [view convertRect:view.bounds toView:[UIApplication sharedApplication].keyWindow];
     
     // 如果是相同的移动视图 不需要更新transform和偏移量
-    if (view.zy_MoveView == _view.zy_MoveView) {
+    if (view.zyMoveView == _view.zyMoveView) {
         _view = view;
         return;
     }
     
     _view = view;
     if (_isScrollMoveView) {
-        _contentInset = ((UIScrollView *)view.zy_MoveView).contentInset;
-        _contentOffset = ((UIScrollView *)view.zy_MoveView).contentOffset;
+        _contentInset = ((UIScrollView *)view.zyMoveView).contentInset;
+        _contentOffset = ((UIScrollView *)view.zyMoveView).contentOffset;
         _transform = CGAffineTransformIdentity;
     }else{
         _contentInset = UIEdgeInsetsZero;
@@ -52,14 +52,14 @@
 {
     // 如果是scrollView
     if (self.isScrollMoveView) {
-        UIScrollView *moveV = (UIScrollView *)self.view.zy_MoveView;
+        UIScrollView *moveV = (UIScrollView *)self.view.zyMoveView;
         [UIView animateWithDuration:duration animations:^{
             moveV.contentInset = UIEdgeInsetsMake(self.contentInset.top, self.contentInset.left, self.contentInset.bottom + offset, self.contentInset.right);
             moveV.contentOffset = CGPointMake(self.contentOffset.x, self.contentOffset.y + offset);
         }];
     }else{
         [UIView animateWithDuration:duration animations:^{
-            self.view.zy_MoveView.transform = CGAffineTransformTranslate(self.transform, 0, -(offset));
+            self.view.zyMoveView.transform = CGAffineTransformTranslate(self.transform, 0, -(offset));
         }];
     }
 }
@@ -67,7 +67,7 @@
 - (void)keyboardHidden:(NSTimeInterval)duration
 {
     if (self.isScrollMoveView) {
-        UIScrollView *moveV = (UIScrollView *)self.view.zy_MoveView;
+        UIScrollView *moveV = (UIScrollView *)self.view.zyMoveView;
         [UIView animateWithDuration:duration animations:^{
             moveV.contentInset = self.contentInset;
             moveV.contentOffset = self.contentOffset;
@@ -76,7 +76,7 @@
         }];
     }else{
         [UIView animateWithDuration:duration animations:^{
-            self.view.zy_MoveView.transform = self.transform;
+            self.view.zyMoveView.transform = self.transform;
         }completion:^(BOOL finished) {
             self.view = nil;
         }];

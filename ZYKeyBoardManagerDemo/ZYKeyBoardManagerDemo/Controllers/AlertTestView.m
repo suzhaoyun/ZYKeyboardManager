@@ -34,8 +34,8 @@
     self.textF.superview.layer.cornerRadius = 10;
     self.textF.superview.layer.masksToBounds = YES;
     
-    self.textF.zy_MoveView = self.textF.superview;
-    self.textF.zy_KeyBoardDistance = 100;
+    self.textF.zyMoveView = self.textF.superview;
+    self.textF.zyKeyBoardDistance = 100;
 }
 
 - (IBAction)cancleClick:(id)sender {

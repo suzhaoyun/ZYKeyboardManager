@@ -11,10 +11,10 @@
 @protocol ZYKeyBoardSenderProtocol <NSObject>
 
 /// 与键盘之间的距离 默认为10
-@property (nonatomic, assign) CGFloat zy_KeyBoardDistance;
+@property (nonatomic, assign) CGFloat zyKeyBoardDistance;
 
 /// 需要做移动的view 默认为当前显示器的view
-@property (nonatomic, weak) UIView *zy_MoveView;
+@property (nonatomic, weak) UIView *zyMoveView;
 
 @end
 

@@ -12,28 +12,28 @@
 
 @implementation UITextField (ZYKB)
 
-- (void)setZy_MoveView:(UIView *)zy_MoveView
+- (void)setZyMoveView:(UIView *)zyMoveView
 {
-    if (self.zy_MoveView == zy_MoveView) {
+    if (self.zyMoveView == zyMoveView) {
         return;
     }
     
-    objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(zyMoveView), zyMoveView, OBJC_ASSOCIATION_ASSIGN);
     
     [self addTarget:[ZYKeyBoardManager sharedManager] action:NSSelectorFromString(@"controlBeginEditing:") forControlEvents:UIControlEventEditingDidBegin];
 }
 
-- (UIView *)zy_MoveView
+- (UIView *)zyMoveView
 {
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setZy_KeyBoardDistance:(CGFloat)zy_KeyBoardDistance
+- (void)setZyKeyBoardDistance:(CGFloat)zyKeyBoardDistance
 {
-    objc_setAssociatedObject(self, @selector(zy_KeyBoardDistance), @(zy_KeyBoardDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(zyKeyBoardDistance), @(zyKeyBoardDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (CGFloat)zy_KeyBoardDistance
+- (CGFloat)zyKeyBoardDistance
 {
     id n = objc_getAssociatedObject(self, _cmd);
     return n?[n floatValue]:10.0;
@@ -54,7 +54,7 @@
 - (BOOL)zy_canBecomeFirstResponder
 {
     BOOL result = [self zy_canBecomeFirstResponder];
-    if (result && self.zy_MoveView) {
+    if (result && self.zyMoveView) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [[ZYKeyBoardManager sharedManager] performSelector:NSSelectorFromString(@"controlBeginEditing:") withObject:self];
@@ -65,26 +65,26 @@
 
 #pragma mark - property
 
-- (void)setZy_KeyBoardDistance:(CGFloat)zy_KeyBoardDistance
+- (void)setZyKeyBoardDistance:(CGFloat)zyKeyBoardDistance
 {
-    objc_setAssociatedObject(self, @selector(zy_KeyBoardDistance), @(zy_KeyBoardDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(zyKeyBoardDistance), @(zyKeyBoardDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (CGFloat)zy_KeyBoardDistance
+- (CGFloat)zyKeyBoardDistance
 {
     id n = objc_getAssociatedObject(self, _cmd);
     return n?[n floatValue]:10.0;
 }
 
-- (void)setZy_MoveView:(UIView *)zy_MoveView
+- (void)setZyMoveView:(UIView *)zyMoveView
 {
-    if (self.zy_MoveView == zy_MoveView){
+    if (self.zyMoveView == zyMoveView){
         return;
     }
-    objc_setAssociatedObject(self, @selector(zy_MoveView), zy_MoveView, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(zyMoveView), zyMoveView, OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (UIView *)zy_MoveView
+- (UIView *)zyMoveView
 {
     return objc_getAssociatedObject(self, _cmd);
 }

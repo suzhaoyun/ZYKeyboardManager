@@ -25,13 +25,13 @@
     self.navigationItem.title = @"普通界面";
     
     // 指定被遮挡时 需要移动的view
-    self.textF1.zy_MoveView = self.view;
+    self.textF1.zyMoveView = self.view;
     
     // 可以设置文本框与键盘的间距
-    self.textV.zy_MoveView = self.view;
-    self.textV.zy_KeyBoardDistance = 30;
+    self.textV.zyMoveView = self.view;
+    self.textV.zyKeyBoardDistance = 30;
     
-    self.textF2.zy_MoveView = self.view;
+    self.textF2.zyMoveView = self.view;
 }
 
 @end
