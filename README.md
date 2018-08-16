@@ -1,3 +1,4 @@
+![alt](https://github.com/suzhaoyun/ZYKeyboardManager/blob/master/demo.gif)
 # ZYKeyboardManager
 iOS开发中，难免会遇到键盘弹出遮挡了输入框的情景， 这种情况需要开发者自行处理，但每次
 都处理这种重复的逻辑对开发者本身并没有任何的提升，在这种场景下，ZYKeyboardManager诞生了。我在自己公司的项目里面也一直在使用，经过2个版本的迭代，相比于最初更稳定，代码结构更清楚，希望大家支持，多多使用，多多反馈问题，我也会继续的维护下去。
@@ -28,7 +29,6 @@ self.textField.zyKeyBoardDistance = 30;
     return cell;
 }
 ```
-![alt](https://github.com/suzhaoyun/ZYKeyboardManager/blob/master/demo.gif)
 ## 核心代码
 思路： 通过ZYKeyBoardSender往外发送所有的输入框触发事件，ZYKeyBoardManager收到事件，根据发送者信息，创建ZYKeyBoardResponder,最后ZYKeyBoardManager监听键盘弹出隐藏通知，responder处理响应。
 
